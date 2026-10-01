@@ -81,6 +81,29 @@ Rules for modernising:
 - **If a bump forces wide-reaching edits, stop** and split it into a dedicated change rather than
   letting it sprawl through the codebase.
 
+## Upstream reference
+
+The `upstream` remote points at https://github.com/JRF63/desktop-streaming. Two branches matter:
+
+- **`upstream/old`** — the branch this fork is based on. Its tip is this fork's original HEAD
+  (`c8622c1`), so there is nothing to pull from it.
+- **`upstream/dev`** — 33 commits made after this fork point (2023-10 to 2024-01), then abandoned
+  mid-restructure, which is why `old` is still the default branch. It is a crates-only
+  decomposition (`audio-codec`, `audio-source`, `conveyor-buffer`, `inputs`, `video-source`,
+  `webrtc-bridge`, `windows-util`) and **contains no server binary, no encoder and no web client**,
+  so it is **not a usable base** for this fork and must not be merged wholesale.
+
+Treat `upstream/dev` as a reference and a parts bin, not a merge target. It is useful for:
+
+- its Opus and loopback-audio implementation (`audio-codec`, `audio-source`) — the audio feature
+  this fork still lacks;
+- worked examples of the `windows` 0.43 → 0.52 and `webrtc` 0.6 → 0.9 bumps;
+- corroboration of this fork's own direction: upstream likewise moved `webrtc-helper` into the
+  repository (renamed `webrtc-bridge`), set `resolver = "2"`, and put `license` in the workspace
+  manifest.
+
+Port from it selectively, one concern per change.
+
 ## Latency-critical code — handle with care
 
 - `server-windows/src/nvidia/encoder.rs` — the capture/encode/pacing loop, RTP timestamp
