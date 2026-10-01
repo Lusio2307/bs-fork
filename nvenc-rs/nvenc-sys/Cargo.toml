@@ -1,0 +1,17 @@
+[package]
+name = "nvenc-sys"
+version = "0.1.0"
+edition = "2021"
+links = "nvenc"
+
+[build-dependencies]
+bindgen = "0.63.0"
+regex = "1.7.1"
+lazy_static = "1.4.0"
+
+[features]
+v9_0 = []
+v9_1 = []
+v10_0 = []
+v11_0 = []
+v11_1 = []
