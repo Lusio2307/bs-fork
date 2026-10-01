@@ -1,0 +1,65 @@
+NOTICE
+======
+
+This repository is a fork of JRF63/desktop-streaming.
+
+    Upstream:  https://github.com/JRF63/desktop-streaming
+    This fork: https://github.com/Lusio2307/bs-fork
+
+The original work is Copyright (c) 2022 Joseph Rafael Ferrer and is licensed under
+MIT OR Apache-2.0. See LICENSE-MIT and LICENSE-APACHE.
+
+Modifications
+-------------
+
+Copyright (c) 2026 Luciano Bigliazzi and contributors.
+
+This fork modifies the original work. In accordance with section 4(b) of the
+Apache License 2.0, notice is given here that files in this repository have been
+changed from their original form. The principal areas of modification are:
+
+  - dependency updates and compatibility fixes;
+  - corrections to the capture and encode path;
+  - repository, build, CI and documentation changes.
+
+Incorporated upstream works
+---------------------------
+
+The following upstream projects are included in this repository as ordinary
+directories ("vendored") rather than as git submodules. Each retains its own
+license files and copyright notices, and remains governed by its own license.
+
+1. webrtc-helper — wrapper over webrtc-rs exposing encoder/decoder/signaller traits
+
+       Origin:  https://github.com/JRF63/webrtc-helper
+       Pin:     cf722d0bda3e0c9cd9e82a0eddfeb41c64600869
+       License: MIT OR Apache-2.0 (see webrtc-helper/LICENSE-APACHE, LICENSE-MIT)
+       Copyright (c) 2022 Joseph Rafael Ferrer
+
+   Note on provenance: the copy of webrtc-helper in this fork carried no git
+   metadata, so the files as vendored could not be verified against the recorded
+   submodule pin above. The pin is the commit recorded by the parent repository.
+
+2. nvenc-rs — provides the `nvenc` and `nvenc-sys` crates (NVIDIA NVENC bindings)
+
+       Origin:  https://github.com/JRF63/nvenc-rs
+       Pin:     61896129ad922ec56852181231f8fdc4cb98874a
+                ("Added licenses", 2023-03-01)
+       License: MIT OR Apache-2.0 (see nvenc-rs/LICENSE-APACHE, LICENSE-MIT)
+       Copyright (c) 2022 Joseph Rafael Ferrer
+
+   This pin matched the checked-out working tree at the time of vendoring, and the
+   tree was clean.
+
+3. desktop-streaming-client-android — the Android client
+
+       Origin:  https://github.com/JRF63/desktop-streaming-client-android
+       Pin:     49255ef3f39d8906e3b2fe6ec861b8705219095a
+       Status:  not vendored and not cloned in this fork.
+
+Third-party dependencies
+------------------------
+
+Rust dependencies are consumed from crates.io and are not vendored here. Their
+licenses are recorded in Cargo.lock and by the crates themselves. Of particular
+note is the `webrtc` crate (webrtc-rs), licensed MIT/Apache-2.0.

@@ -1,6 +1,6 @@
 [workspace]
 members = ["server-windows", "webrtc-helper"]
-exclude = ["client-android", "nvenc-rs"]
+exclude = ["nvenc-rs"]
 
 [profile.release]
 lto = true
