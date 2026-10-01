@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    # The server is Windows-only (DXGI, NVENC), so the whole workspace builds here.
+    # The runner image already provides LLVM, which nvenc-sys needs for bindgen.
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: cargo check
+        run: cargo check --workspace --all-targets
+
+      - name: cargo clippy
+        run: cargo clippy --workspace --all-targets
+
+      # `capture::duplicator_desc` needs a real GPU and display, so it cannot run
+      # on a hosted runner. It is named here rather than left to fail the build.
+      - name: cargo test
+        run: cargo test --workspace -- --skip duplicator_desc
